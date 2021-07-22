@@ -1,6 +1,5 @@
 export const GET_USERS = 'GET_USERS'
 export const GET_USER_SCORE = 'GET_USER_SCORE'
-export const ANSWER_QUESTION ='ANSWER_QUESTION'
 
 export function receiveUsers(users)
 {
@@ -15,7 +14,6 @@ function handleUserScore (uid) {
         uid,
     }
 }
-function handleUserAnswer (authedUser,qid,answer)
 export function getUserScore (uid){
 
     return(dispatch) =>{
