@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
  class Login extends Component {
      handleChange =(e) =>{
-         console.log(`handle change ${e.target.value} / ` );
+         
          if (e.target.value !== ''){
              this.props.change (e.target.value);
          }

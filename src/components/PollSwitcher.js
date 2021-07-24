@@ -18,9 +18,9 @@ import UnAnsweredPoll from './UnAnsweredPoll'
     render() {
         const qid= new URLSearchParams(this.props.location.search).get("id")
          //this.props.location.search
-        const {authedUser,id,isAnswered,match} = this.props //,question,users
+        const {authedUser} = this.props //,id,isAnswered,match//,question,users
         // const qid =  match.params.id
-        console.log(`PollSwitcher [${qid}] Answered  [${authedUser}]: ${isQuestionAnswered(authedUser,qid)}`);
+        // console.log(`PollSwitcher [${qid}] Answered  [${authedUser}]: ${isQuestionAnswered(authedUser,qid)}`);
 
         if(! isQuestion(qid))
         {

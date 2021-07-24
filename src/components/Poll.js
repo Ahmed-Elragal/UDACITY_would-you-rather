@@ -16,7 +16,7 @@ import {convertDate} from '../utils/api'
     //  }
     render() {
         const {id,question,users,isAnswered} = this.props
-        console.log(`poll : id:${id} `,question);
+        // console.log(`poll : id:${id} `,question);
 
         const gotoPoll = (id,answered) =>{
          
@@ -57,7 +57,7 @@ import {convertDate} from '../utils/api'
               <img alt='avatar' className='avatar' src={ `avatars/${question.author}.jpg`}/>
               <div className='question-details-data' >
                 <div>
-                   <p> { users[question.author].name} </p> 
+                   <p className='user-name'> { users[question.author].name} </p> 
                    <p> {convertDate(question.timestamp )}</p>
                    
                 </div>                         

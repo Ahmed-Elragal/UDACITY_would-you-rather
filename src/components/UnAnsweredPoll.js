@@ -1,85 +1,79 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-// import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+//import {USER_ANSWER_QUESTION} from '../redux/actions/users'
+import {handleAnswerQuestion} from '../redux/actions/questions'   //, QUESTION_ANSWER_QUESTION
 import {convertDate} from '../utils/api'
 
  class UnAnsweredPoll extends Component {
-  
-  
+    
     state ={
       optionOne : false,
       optionTwo :false,
-      ansewer :'',
+      answer :'',
     } 
-    handleChange = (e) =>{
-      console.log('handleChange : Option \n ' , e.target.id);
+    handleChange =async (e) =>{
+      // console.log('handleChange : Option \n ' , e.target.id);
       if (e.target.id === 'optionOne'){
-        this.setState( () => ({
+        await this.setState( () => ({
+          answer : 'optionOne',
           optionOne : true,
           optionTwo : false,
-          ansewer : 'optionOne'
+          
         }))
 
       }
       else if(e.target.id === 'optionTwo'){
-        this.setState( () => ({
+        await this.setState( () => ({
+          answer : 'optionTwo',
           optionOne : false,
           optionTwo : true,
-          ansewer : 'optionTwo'
+          
         }))
       }
-      console.log('options : ', this.state);
+      // console.log('options : ', this.state);
     }
-   handleSubmit =(e)=>{
-     e.preventDefault()
-     const {id,authedUser,users,questions,dispatch} = this.props
+   handleSubmit =()=>{
+     //e.preventDefault()
+     const {id,authedUser,dispatch} = this.props   //,users,questions
+     const {answer} = this.state
+     const qid = id
+     if(answer !== 'optionOne' && answer !== 'optionTwo'){
+       alert('please choose one answer only '+answer)
+       return;
+     }    
      dispatch(showLoading() )
-    //  await dispatch()
-
-
-
+     dispatch(handleAnswerQuestion({authedUser,qid,answer}))
+     dispatch(hideLoading() )
 
    }
     render() {
-      // alert('unasnswered')
-      const {id,questions,users,isAnswered} = this.props
+      
+      const {id,questions,users} = this.props 
       const question = questions[id]
       if(!id){
-        console.log('invalid id : ' +id)
+       
         return (
-          <div>inveld id</div>
-          // <Redirect from={`/question/id/${id}`}  to ={`/404/${id}`}/>
+          <div>inveld id
+              <Redirect  to ={`/404/${id}`}/>
+          </div>
         )
       }
-      console.log('unanswered ' + id);
       
-      // const { qid } = useParams()
         return (    
           
-          <div className='question-details'>  
-            {/* {
-            isAnswered ? 
-            <RouterSecured condition = {this.props.authedUser === ''  || this.props.authedUser ===null} 
-            path={`/question/id/${id}`}component={<AnsweredPoll id ={ id} />}
-            isExact={true} falsePath ={'/login'} />
-            :<RouterSecured condition = {this.props.authedUser === ''  || this.props.authedUser ===null} 
-            path={`/question/id/${id}`}component={<UnAnsweredPoll id ={ id} />}
-            isExact={true} falsePath ={'/login'} />
-            
-            } */}
-            
-                
+          <div className='question-details'> 
             {/* <div className='question-user'> */}
             
               <img alt='avatar' className='avatar' src={ `../avatars/${question.author}.jpg`}/>
-              <div className='question-details-data' >
+              <div className='question-details-data bg-color-blue-black' >               
                 <div>
-                   <p> { users[question.author].name} </p> 
+                   <p className='user-name'> { users[question.author].name} </p> 
                    <p> {convertDate(question.timestamp )}</p>
                    
                 </div>                         
-              <h5>Asks Would you rather :  </h5>
+              <h3>Asks Would you rather :  </h3>
               <div>
                 <input id='optionOne' type="radio" value="optionOne" 
                 checked={this.state.optionOne} onChange ={ (e) =>(this.handleChange(e))} />
@@ -91,20 +85,18 @@ import {convertDate} from '../utils/api'
                 checked={this.state.optionTwo}  onChange ={ (e) =>(this.handleChange(e))} />
                 <label htmlFor="optionTwo">{question.optionTwo.text}</label>                
             </div>
-              <button  >Submit</button>
+              <button onClick={this.handleSubmit} >Submit</button>
             
-              
             </div>
           </div>   
         
         )
     }
 }
-function mapStateToProps (state,dispatch){
-  // console.log( 'DASHBOARD :map ',state);
-  // console.log( 'store.questions',state.questions);
+function mapStateToProps (state){
+
   return {
-  authedUser :state.authedUser.authedUser,
+    authedUser :state.authedUser,
     users :state.users,
     questions : state.questions,
   }

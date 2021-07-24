@@ -1,50 +1,55 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+
 
 class LeaderBoard extends Component {
+
+
+  
+  // constructor(props){
+  //   super(props)
+    
+  // }
     render() {
+      const {users} = this.props
+    
+      const usersByScore = Object.values (users).sort( (a,b) =>  (b.questions.length + Object.values(b.answers).length) -  (a.questions.length +Object.values(a.answers).length) )
         return (
             <div>
+              
                 <ul className='questions-list'>
-                      <li>
-                        <div className='user-details'>
-                          {/* <div className='question-user'> */}
-                          
-                            <img alt='avatar' className='avatar' src='avatars/sarahedo.jpg'/>
-                            
-                            
-                            <div className='user-details-data' >
-                            
-                              <div>sarahedo</div>                         
-                            <h5>statics</h5>
-                            <div>Ansewered Questions : 3</div>
-                            <div>Asked Questions : 6 </div> 
-                            </div>
-                            <div className='score'> score:<br/> 9 </div>
-                         
-                        </div>                  
-                      </li>
-
-                      <li>
-                        <div className='user-details'>
-                          {/* <div className='question-user'> */}
-                          
-                            <img alt='avatar' className='avatar' src='avatars/johndoe.jpg'/>
-                            
-                            
-                            <div className='user-details-data' >
-                            
-                              <div>johndoe</div>                         
-                            <h5>statics</h5>
-                            <div>Ansewered Questions : 3</div>
-                            <div>Asked Questions : 4 </div> 
-                            </div>
-                            <div className='score'> score:<br/> 6 </div>
-                         
-                        </div>                  
-                      </li>
+                  {usersByScore.map ((user) => (
+                    <li key ={user.id}>
+                    <div className='user-details'>
+                      {/* <div className='question-user'> */}
+                      
+                        <img alt='avatar' className='avatar' src={`avatars/${user.id}.jpg`}/>
+                        
+                        
+                        <div className='user-details-data' >
+                        
+                          <div className='user-name'>{user.name}</div>                         
+                        <h5>statics</h5>
+                        <div>Ansewered Questions : {Object.values(user.answers).length}</div>
+                        <div>Asked Questions :  {user.questions.length} </div> 
+                        </div>
+                        <div className='score'> score:<br/> {Object.values(user.answers).length + user.questions.length} </div>
+                     
+                    </div>                  
+                  </li>
+                  ))}
+                      
                     </ul>                
             </div>
         )
     }
 }
-export default LeaderBoard
+function mapStateToProps (state){
+  
+  return {
+    authedUser :state.authedUser,
+    users :state.users,
+    //questions : state.questions,
+  }
+}
+export default connect (mapStateToProps) (LeaderBoard)

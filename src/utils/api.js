@@ -1,4 +1,9 @@
-import {users ,questions} from './_DATA'
+import {usersData ,questionsData} from './_DATA'
+
+
+let users =usersData
+let questions = questionsData
+
 
 export function isQuestion (qid){
   return questions[qid] !== undefined
@@ -20,13 +25,13 @@ function generateUID () {
   }
   export function isQuestionAnswered(authedUser,qid)
   {
-    console.log(`AuthedUser : ${authedUser} \n opt1 : ${questions[qid].optionOne.votes.includes(authedUser)} 
-      opt2 : ${questions[qid].optionTwo.votes.includes(authedUser)}`);
+    //console.log(`AuthedUser : ${authedUser} \n opt1 : ${questions[qid].optionOne.votes.includes(authedUser)} 
+      //opt2 : ${questions[qid].optionTwo.votes.includes(authedUser)}`);
     
     if (questions[qid].optionOne.votes.includes(authedUser) ||questions[qid].optionTwo.votes.includes(authedUser))
     {
-      console.log(`opt1 : ${questions[qid].optionOne.votes.includes(authedUser)} 
-      opt2 : ${questions[qid].optionTwo.votes.includes(authedUser)}`);
+      //console.log(`opt1 : ${questions[qid].optionOne.votes.includes(authedUser)} 
+      //opt2 : ${questions[qid].optionTwo.votes.includes(authedUser)}`);
       return true
     }
     else{return false}
@@ -79,6 +84,8 @@ function generateUID () {
   }
   
   export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+    // console.log(`_saveAnswer [user : ${authedUser}] 
+    // [qid : ${qid}] [answer : ${answer}]` ,users);
     return new Promise((res, rej) => {
       setTimeout(() => {
         users = {

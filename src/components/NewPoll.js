@@ -1,28 +1,26 @@
 import React, { Component } from 'react'
-import{withRouter}from 'react-router-dom'
+// import{withRouter}from 'react-router-dom'
+import {connect} from 'react-redux'
+import {handleAddQuestion} from '../redux/actions/questions'
 
 
 class NewPoll extends Component {
-    state ={
-        tQuestion : '',
+    state ={       
         tOptA :'',
         tOptB :'',
     }
     
     handleChange = (e) =>{
-        const val = e.target.val
+        const val = e.target.value
+        // console.log(e.target.name,e.target.value);
         switch (e.target.name) {
-            case 'txtQuestion':
-                this.setState(() => ({
-                    tQuestion : val
-                }))
-                break;
-            case 'txtOptA':
+            
+            case 'txtOptionOne':
                     this.setState(() => ({
                         tOptA : val
                     }))
             break;
-            case 'txtOptB':
+            case 'txtOptionTwo':
                     this.setState(() => ({
                         tOptB : val
                     }))
@@ -32,11 +30,34 @@ class NewPoll extends Component {
         }
     }
 handleSubmit =() =>{
-    const tQuestion = this.state.tQuestion
-    const tOptA = this.state.tOptA
-    const tOptB = this.state.tOptB
     
-    alert(`new questions is \n ${tQuestion} \n OptA : ${tOptA} \n OptB: ${tOptB} `)
+    const {tOptA ,tOptB }= this.state
+    
+    // console.log(tOptA,tOptB);
+    
+
+    if (tOptA === '' || tOptB ==='') {
+        alert ('please Fill Option 1 and option 2')
+        tOptA === ''  
+            ? document.getElementsByName('txtOptionOne')[0].focus()
+            : document.getElementsByName('txtOptionTwo')[0].focus()
+        return
+    }
+
+    if (tOptA === tOptB) {
+        alert('the 2 answers had to be diffrent')
+        return
+    }
+
+    const {authedUser,dispatch} = this.props
+    // console.log(`newPoll : `,tOptA,tOptB,authedUser);
+
+    dispatch (handleAddQuestion({optionOneText : tOptA,optionTwoText : tOptB,author : authedUser}))
+
+    
+    
+    
+    alert(`new questions is Would you rather \n OptA : ${tOptA} \n OptB: ${tOptB} `)
     // this.props.history.push('/')
     
 }
@@ -45,21 +66,21 @@ handleSubmit =() =>{
         return (
             <div>
                 <h2>Create New Question </h2>
-                <div>                
-                    Would You rather : 
+                <div >                
+                    <h3>Would You rather : </h3>
                     <br />  <br />
                 </div>
-                <div>
+                <div > 
                     {/* <label htmlFor='txtOptA'><pre> Option A  </pre></label> */}
                     Option A <br />
-                    <input width={'100px'}  type='text' name='txtOptA' value ={this.state.tOptA} onChange ={this.handleChange} />
+                    <input width={'200px'}  type='text' name='txtOptionOne' value ={this.state.tOptA} onChange ={this.handleChange} />
                     <br />   <br />
                 </div>
                 <div>
                     {/* <label htmlFor='txtOptB'>  Option B  </label>
                      */}
                       Option B <br />
-                    <input width={'100px'} type='text' name='txtOptB' value ={this.state.tOptB} onChange ={this.handleChange} />
+                    <input width={'200px'} type='text' name='txtOptionTwo' value ={this.state.tOptB} onChange ={this.handleChange} />
                     <br />  <br />
                 </div>
                 <div>
@@ -69,4 +90,13 @@ handleSubmit =() =>{
         )
     }
 }
-export default withRouter( NewPoll)
+function mapStateToProps (state){
+    // console.log( 'DASHBOARD :map ',state);
+    // console.log( 'store.questions',state.questions);
+    return {
+      authedUser :state.authedUser,
+      users :state.users,
+      questions : state.questions,
+    }
+  }
+  export default connect (mapStateToProps) (NewPoll)

@@ -4,15 +4,26 @@ import React, { Component } from 'react'
     render() {
         return (
             <footer className='footer'>
-            <p>GitHub</p>
-            <p>LinkedIn</p>
-            <p>FreeLancer</p>
-            <div>
-              <hr />
-            <a href="https://www.freepik.com/photos/people">
-              People photo created by julos - www.freepik.com</a>
-            </div>
-
+             
+              <div className='footer-section'>
+                 <h2>my links</h2>
+                 <div>
+                  <a href='github.com/Ahmed-Elragal/'>My GitHub</a>
+                  <a href='https://www.linkedin.com/in/ahmed-fawzy-elragal/'>My LinkedIn</a>
+                  <a href='https://www.guru.com/freelancers/ahmed-fawzy-elragal'>My Guru</a>
+                </div>
+              </div>
+               <div className='footer-section'> 
+                  <h2>resources</h2> 
+                   <div >
+                      <a href='http://www.udacity.com'>UDACITY</a>
+                      <a href='https://reactjs.org'>React js</a>
+                      <a href='https://redux.js.org'>Redux js </a>
+                  </div>
+                </div> 
+               
+              
+           
           </footer>
         )
     }

@@ -1,12 +1,7 @@
 import {_getUsers, _getQuestions} from '../../utils/api'
-// import {getInitialData} from '../utils/api'
-// import { receiveTweets } from './tweets'
 import { receiveUsers } from './users'
 import {receiveQuestions} from './questions'
-// import { setAuthedUser } from './authedUser'
 import {showLoading,hideLoading} from 'react-redux-loading-bar'
-
-const AUTHED_ID = 'tylermcginnis'
 
 export const getInitialData = () =>{
     return Promise.all([

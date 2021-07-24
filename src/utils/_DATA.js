@@ -1,4 +1,4 @@
-export let users = {
+export let usersData = {
   sarahedo: {
     id: 'sarahedo',
     name: 'Sarah Edo',
@@ -34,7 +34,7 @@ export let users = {
   }
 }
 
-export let questions = {
+export let questionsData = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
     author: 'sarahedo',
