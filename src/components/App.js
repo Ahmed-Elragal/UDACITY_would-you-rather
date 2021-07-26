@@ -19,7 +19,11 @@ class App extends Component {
   componentDidMount(){
     this.props.dispatch(showLoading())
     this.props.dispatch( handleInitialData())
-    this.props.dispatch(hideLoading())
+    .then (() => {
+      this.props.dispatch(hideLoading())
+    })
+    
+    
   }
   state = {
     loginedUser :'',
@@ -41,19 +45,21 @@ class App extends Component {
     alert('you have been logged out , please login again \n Current user :'+authedUser)
   }
   render() {
+    const {users} = this.props.state
+    // console.log(`APP > [${users[authedUser].name}] users` ,users)
     return (
         <div className="App dark-red-gradiant full-height"  >
           <LoadingBar  style={{ backgroundColor: 'yellow', height: '10px' }} />
          
          
-          <RouterSecured condition = {this.props.authedUser === ''  || this.props.authedUser ===null} 
+          <RouterSecured condition = {(this.props.authedUser === ''  || this.props.authedUser ===null )} 
           path={'/login'}component={<Login change ={ this.handleChangeUser} />}
           isExact={true} falsePath ={'/login'} />
            
             <div className='main-container'>
              
                   <RouterSecured condition ={ this.props.authedUser !==''} path={'/'}
-                  component={<NavBar user={this.props.authedUser} onLogOut= {this.logout}/>}
+                  component={<NavBar user={this.props.authedUser} userName ={this.props.authedUser} onLogOut= {this.logout}/>}
                   isExact={false}falsePath ={'/login'} />
                 
                   <div className='body-container centered'  >

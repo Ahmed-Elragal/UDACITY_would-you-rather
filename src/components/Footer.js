@@ -6,7 +6,7 @@ import React, { Component } from 'react'
             <footer className='footer'>
              
               <div className='footer-section'>
-                 <h2>my links</h2>
+                 <h2 className='color-second'>my links</h2>
                  <div>
                   <a href='github.com/Ahmed-Elragal/'>My GitHub</a>
                   <a href='https://www.linkedin.com/in/ahmed-fawzy-elragal/'>My LinkedIn</a>
@@ -14,7 +14,7 @@ import React, { Component } from 'react'
                 </div>
               </div>
                <div className='footer-section'> 
-                  <h2>resources</h2> 
+                  <h2 className='color-second'>resources</h2> 
                    <div >
                       <a href='http://www.udacity.com'>UDACITY</a>
                       <a href='https://reactjs.org'>React js</a>

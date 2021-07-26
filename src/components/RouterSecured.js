@@ -4,7 +4,7 @@ import { Route, Redirect } from  "react-router-dom";
 class  RouterSecured extends Component {
     render() {
         const {condition,isExact,falsePath} = this.props
-        //console.log('routerSecured Props : path ',this.props.path );
+        console.log('routerSecured Props : cond ',condition );
         if(condition === true){
             
             return (

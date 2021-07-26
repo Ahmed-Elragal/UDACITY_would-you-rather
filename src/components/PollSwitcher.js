@@ -15,8 +15,10 @@ import UnAnsweredPoll from './UnAnsweredPoll'
         //         id : this.props.match.params.id
         //     }
         // }
+        
     render() {
         const qid= new URLSearchParams(this.props.location.search).get("id")
+        console.log( 'poll switcher:' , this.props)
          //this.props.location.search
         const {authedUser} = this.props //,id,isAnswered,match//,question,users
         // const qid =  match.params.id
@@ -49,10 +51,11 @@ import UnAnsweredPoll from './UnAnsweredPoll'
 }
 
 function mapStateToProps(state) {
-    //const {qid} = props.match.params
+    //const {qid} = this.props.match.params
     return {
         authedUser :state.authedUser
         
     }
 }
-export default connect(mapStateToProps)( withRouter (PollSwitcher))
+const withRouterPollSwitcher = withRouter(PollSwitcher)
+export default connect(mapStateToProps)(withRouterPollSwitcher)

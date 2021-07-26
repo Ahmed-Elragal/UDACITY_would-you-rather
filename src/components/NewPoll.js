@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import{withRouter}from 'react-router-dom'
+import{withRouter}from 'react-router-dom'
 import {connect} from 'react-redux'
 import {handleAddQuestion} from '../redux/actions/questions'
 
@@ -58,7 +58,7 @@ handleSubmit =() =>{
     
     
     alert(`new questions is Would you rather \n OptA : ${tOptA} \n OptB: ${tOptB} `)
-    // this.props.history.push('/')
+     this.props.history.push('/home')
     
 }
 
@@ -73,14 +73,14 @@ handleSubmit =() =>{
                 <div > 
                     {/* <label htmlFor='txtOptA'><pre> Option A  </pre></label> */}
                     Option A <br />
-                    <input width={'200px'}  type='text' name='txtOptionOne' value ={this.state.tOptA} onChange ={this.handleChange} />
+                    <input className='input-option' type='text' name='txtOptionOne' value ={this.state.tOptA} onChange ={this.handleChange} />
                     <br />   <br />
                 </div>
                 <div>
                     {/* <label htmlFor='txtOptB'>  Option B  </label>
                      */}
                       Option B <br />
-                    <input width={'200px'} type='text' name='txtOptionTwo' value ={this.state.tOptB} onChange ={this.handleChange} />
+                    <input className='input-option' type='text' name='txtOptionTwo' value ={this.state.tOptB} onChange ={this.handleChange} />
                     <br />  <br />
                 </div>
                 <div>
@@ -99,4 +99,4 @@ function mapStateToProps (state){
       questions : state.questions,
     }
   }
-  export default connect (mapStateToProps) (NewPoll)
+  export default connect (mapStateToProps) (withRouter( NewPoll))
