@@ -8,12 +8,7 @@ import {convertDate} from '../utils/api'
 
  class Poll extends Component {
       
-     
-    //  conevrtDate =(timestamp) =>{
-         
-    //      const dt = new Date(timestamp)
-    //      return dt.toLocaleString()
-    //  }
+
     render() {
         const {id,question,users,isAnswered} = this.props
         // console.log(`poll : id:${id} `,question);
@@ -40,16 +35,7 @@ import {convertDate} from '../utils/api'
 
           
             <div className='question-details'>  
-            {/* {
-            isAnswered ? 
-            <RouterSecured condition = {this.props.authedUser === ''  || this.props.authedUser ===null} 
-            path={`/question/id/${id}`}component={<AnsweredPoll id ={ id} />}
-            isExact={true} falsePath ={'/login'} />
-            :<RouterSecured condition = {this.props.authedUser === ''  || this.props.authedUser ===null} 
-            path={`/question/id/${id}`}component={<UnAnsweredPoll id ={ id} />}
-            isExact={true} falsePath ={'/login'} />
             
-            } */}
             
                 
             {/* <div className='question-user'> */}
@@ -64,7 +50,7 @@ import {convertDate} from '../utils/api'
               <h5>Asks Would you rather :  </h5>
               <div>{question.optionOne.text}</div>
               <div>{question.optionTwo.text}</div>
-              <Link to ={`/quesion/?id=${id}`}  onClick={ () => gotoPoll(id,isAnswered) } >view question</Link>
+              <Link className='button' to ={`questions/${id}`}  onClick={ () => gotoPoll(id,isAnswered) } >view question</Link>
             </div>
           </div>   
         )

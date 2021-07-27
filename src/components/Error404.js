@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 
-export default class Error404 extends Component {
+class Error404 extends Component {
     render() {
         
         return (
             <div>
-                Error 404 Page you requested can't be found
+                <h3 >Error 404 Page you requested can't be found :</h3>
+                <p>url : {this.props.from}</p>
+                <br/> <br/>
+                <img alt='Error 404 Page not Found' src='/404.jpg' height='400px' width='400px'/>
+                
             </div>
         )
     }
 }
+export default withRouter(Error404)

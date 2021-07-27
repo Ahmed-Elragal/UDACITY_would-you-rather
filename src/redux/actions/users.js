@@ -28,7 +28,7 @@ export function handleUserAnswer ({authedUser,qid,answer}){
     }
 }
 export function handleUserQuestionAdd(question) {
-    console.log(`ACTION.User: handleUserQuestionAdd : `,question);
+    // console.log(`ACTION.User: handleUserQuestionAdd : `,question);
     return {
         type :USER_QUESTION_ADD,
         payload :{
@@ -40,7 +40,7 @@ export function getUserScore (uid){
 
     return(dispatch) =>{
         dispatch(showLoading())
-        console.log('Action/getuserScore :uid :' ,uid);
+        // console.log('Action/getuserScore :uid :' ,uid);
         dispatch(handleUserScore)
         dispatch(hideLoading())
     }

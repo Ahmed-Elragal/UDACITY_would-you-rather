@@ -10,8 +10,8 @@ import React, { Component } from 'react'
      }
     render() {
         // alert('please login first')
-        const {users} =this.props
-        console.log('login props',this.props);
+        // const {users} =this.props
+        // console.log('login props',this.props);
         return (
             <div className='App dark-red-gradiant'>
                 <div className='login-parent dark-red-gradiant position-absolute top-50 start-50 translate-middle'>

@@ -56,7 +56,7 @@ import {convertDate} from '../utils/api'
        
         return (
           <div>inveld id
-              <Redirect  to ={`/404/${id}`}/>
+              <Redirect   to ={`/404/questions/${id}`}/>
           </div>
         )
       }

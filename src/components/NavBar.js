@@ -17,11 +17,11 @@
           return (
               <header className='navbar-container header'>
             
-                <div className='nav row logo '>
-                  <img alt='avatar' className='navbar-brand logo-img' src='logo.jpg'/>
+                <div className='nav row'>
+                  
                   {/* <div className='menu-container'> */}
                       <div className="nav navbar-dark bg-dark  justify-content-end col-md align-top menu-container" >
-                      
+                      <img alt='avatar' className='logo-img align-self-start' src='/logo.jpg'/>
 
                       <Link className="nav-link active"  to="/home" onClick={this.toggleActive}>Home</Link>
                       <Link className="nav-link" to="/add"  onClick={this.toggleActive}>New Poll</Link>

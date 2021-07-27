@@ -64,27 +64,44 @@ handleSubmit =() =>{
 
     render() {
         return (
+        //     <div className='question-details'>  
+            
+        //       <img alt='avatar' className='avatar' src={ `avatars/${question.author}.jpg`}/>
+        //       <div className='question-details-data' >
+        //         <div>
+        //            <p className='user-name'> { users[question.author].name} </p> 
+        //            <p> {convertDate(question.timestamp )}</p>
+                   
+        //         </div>                         
+        //       <h5>Asks Would you rather :  </h5>
+        //       <div>{question.optionOne.text}</div>
+        //       <div>{question.optionTwo.text}</div>
+        //       <Link className='button' to ={`questions/${id}`}  onClick={ () => gotoPoll(id,isAnswered) } >view question</Link>
+        //     </div>
+        //   </div>   
             <div>
-                <h2>Create New Question </h2>
-                <div >                
-                    <h3>Would You rather : </h3>
-                    <br />  <br />
-                </div>
-                <div > 
-                    {/* <label htmlFor='txtOptA'><pre> Option A  </pre></label> */}
-                    Option A <br />
-                    <input className='input-option' type='text' name='txtOptionOne' value ={this.state.tOptA} onChange ={this.handleChange} />
-                    <br />   <br />
-                </div>
-                <div>
-                    {/* <label htmlFor='txtOptB'>  Option B  </label>
-                     */}
-                      Option B <br />
-                    <input className='input-option' type='text' name='txtOptionTwo' value ={this.state.tOptB} onChange ={this.handleChange} />
-                    <br />  <br />
-                </div>
-                <div>
-                    <button onClick={this.handleSubmit} >Submit Question</button>
+                <h3>Create New Question </h3>
+                <div  className='new-question'>  
+                <br />
+                    <h4>Would You rather : </h4>
+                   
+                    <div className='new-question-details'>
+                        <div  > 
+                           
+                            Option A <br />
+                            <input className='input-option' type='text' name='txtOptionOne' value ={this.state.tOptA} onChange ={this.handleChange} />
+                            <br />   <br />
+                        </div>
+                        <div>
+                           
+                            Option B <br />
+                            <input className='input-option' type='text' name='txtOptionTwo' value ={this.state.tOptB} onChange ={this.handleChange} />
+                            
+                        </div>
+                        <div>
+                            <button onClick={this.handleSubmit} >Submit Question</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

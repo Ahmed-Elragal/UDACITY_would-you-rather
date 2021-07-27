@@ -7,6 +7,7 @@ import AnsweredPoll from './AnsweredPoll'
 import UnAnsweredPoll from './UnAnsweredPoll'
 
  class PollSwitcher extends Component {
+     
     
         // constructor(props){
         //     super(props);
@@ -17,8 +18,10 @@ import UnAnsweredPoll from './UnAnsweredPoll'
         // }
         
     render() {
-        const qid= new URLSearchParams(this.props.location.search).get("id")
-        console.log( 'poll switcher:' , this.props)
+        //const qid= new URLSearchParams(this.props.location.search).get("id")
+        
+        const qid= this.props.location.pathname.replace("/questions/", "")
+        // console.log( 'poll switcher:' , this.props.location.pathname.replace("/questions/", ""))
          //this.props.location.search
         const {authedUser} = this.props //,id,isAnswered,match//,question,users
         // const qid =  match.params.id
@@ -28,7 +31,8 @@ import UnAnsweredPoll from './UnAnsweredPoll'
         {
             return(
                 <div>invalid {qid}
-                    <Redirect from={`/question/id/${qid}`}  to ={`/404/${qid}`}/>
+                    {/* {console.log(`POLLSWITCHER: not valid question[${qid}]`)} */}
+                    <Redirect from={`/questions/${qid}`}  to ={`/404/questions/${qid}`}/>
                 </div>
             )
         

@@ -23,7 +23,7 @@ import {convertDate} from '../utils/api'
         // console.log('invalid id : ' +id)
         return (
           <div>inveld id
-            <Redirect   to ={`/404/${id}`}/>
+            <Redirect   to ={`/404/questions/${id}`}/>
           </div>
         )
       }

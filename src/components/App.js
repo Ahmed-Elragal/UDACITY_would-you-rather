@@ -10,6 +10,7 @@ import DashBoard from './DashBoard';
 import RouterSecured from './RouterSecured'
 import NewPoll from './NewPoll';
 import LeaderBoard from './LeaderBoard'
+import Error404 from './Error404'
 import {setAuthedUser} from '../redux/actions/authedUser'
 import {showLoading,hideLoading, LoadingBar} from 'react-redux-loading-bar'
 import PollSwitcher from './PollSwitcher';
@@ -18,6 +19,14 @@ class App extends Component {
 
   componentDidMount(){
     this.props.dispatch(showLoading())
+    const thePath = this.props.location.pathname === '/login' ? '/home' :  this.props.location.pathname
+    this.props.location.pathname &&(
+      this.setState( (path) =>({
+        path : thePath
+      }))
+    )
+    // console.log('requested URL : ',this.state.path , thePath );
+
     this.props.dispatch( handleInitialData())
     .then (() => {
       this.props.dispatch(hideLoading())
@@ -27,16 +36,17 @@ class App extends Component {
   }
   state = {
     loginedUser :'',
+    path : ''
   }
 
   handleChangeUser =async (user) =>{    
-    const {dispatch,authedUser} = this.props
+    const {dispatch} = this.props
     dispatch(showLoading())
     
     await dispatch(setAuthedUser(user))
-     alert(`welcome ${user} logined to ${authedUser}`)
+     alert(`welcome ${user} `)
       dispatch(hideLoading())
-      this.props.history.push('/home')
+       this.props.history.push(this.state.path)
   }
   logout = () =>{
     const {dispatch,authedUser} = this.props
@@ -45,7 +55,7 @@ class App extends Component {
     alert('you have been logged out , please login again \n Current user :'+authedUser)
   }
   render() {
-    const {users} = this.props.state
+    // const {users} = this.props.state
     // console.log(`APP > [${users[authedUser].name}] users` ,users)
     return (
         <div className="App dark-red-gradiant full-height"  >
@@ -71,7 +81,7 @@ class App extends Component {
                         component={<DashBoard user={this.props.authedUser}/>}
                         isExact={true} falsePath ={'/login'} />
 
-                        <RouterSecured condition ={ this.props.authedUser !==''} path={'/quesion/'}
+                        <RouterSecured condition ={ this.props.authedUser !==''} path={'/questions/'}
                         component={<PollSwitcher user={this.props.authedUser}/>}
                         isExact={false} falsePath ={'/login'} />
 
@@ -82,6 +92,11 @@ class App extends Component {
                         <RouterSecured condition ={ this.props.authedUser!==''} path={'/leaderboard'}
                         component={<LeaderBoard />}
                         isExact={true}falsePath ={'/login'} />
+                         <RouterSecured condition = {(this.props.authedUser === ''  || this.props.authedUser ===null )} 
+                            path={'/login'}component={<Login change ={ this.handleChangeUser} />}
+                            isExact={true} falsePath ={'/login'} />
+
+                        <RouterSecured condition ={ this.props.authedUser!==''} path= '*'  component= {<Error404 from={this.state.path}/> } falsePath ={'/login'} />
 
                       </Switch>     
                    </Fragment>
